@@ -33,7 +33,9 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 40),
 
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.register);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.softAqua,
                     minimumSize: const Size(200, 50),
@@ -45,7 +47,9 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.login);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.accentPink,
                     minimumSize: const Size(200, 50),
