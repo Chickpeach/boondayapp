@@ -8,64 +8,78 @@ class TotalStatisticsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: Image.asset(
-            'assets/icons/back.png',
-            width: 40,
-            height: 40,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            const Text(
-              'สถิติรวม',
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-                color: AppColors.softAqua,
+      body: Stack(
+        children: [
+          // ปุ่มย้อนกลับ
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                  icon: Image.asset(
+                    'assets/icons/back.png',
+                    width: 30, // ปรับขนาดให้ match กับหน้าอื่น
+                    height: 30,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
               ),
-              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 24),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                children: const [
-                  StatisticImageBox(
-                    imagePath: 'assets/images/statistics_donate.png',
-                    labelTitle: 'สถิติยอดการทำบุญ',
-                    labelValue: '962 คน',
+          ),
+
+          // เนื้อหา
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 80, left: 16, right: 16), // เผื่อระยะจากปุ่ม
+              child: Column(
+                children: [
+                  const Text(
+                    'สถิติรวม',
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.softAqua,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  StatisticImageBox(
-                    imagePath: 'assets/images/statistics_temple.png',
-                    labelTitle: 'สถิติจำนวนวัด',
-                    labelValue: '3 วัด',
-                  ),
-                  StatisticImageBox(
-                    imagePath: 'assets/images/statistics_user.png',
-                    labelTitle: 'สถิติผู้ใช้งานทั้งหมด',
-                    labelValue: '2,440 คน',
-                  ),
-                  StatisticImageBox(
-                    imagePath: 'assets/images/statistics_god.png',
-                    labelTitle: 'สถิติจำนวนองค์เทพ',
-                    labelValue: '6 องค์',
+                  const SizedBox(height: 24),
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      children: const [
+                        StatisticImageBox(
+                          imagePath: 'assets/images/statistics_donate.png',
+                          labelTitle: 'สถิติยอดการทำบุญ',
+                          labelValue: '962 คน',
+                        ),
+                        StatisticImageBox(
+                          imagePath: 'assets/images/statistics_temple.png',
+                          labelTitle: 'สถิติจำนวนวัด',
+                          labelValue: '3 วัด',
+                        ),
+                        StatisticImageBox(
+                          imagePath: 'assets/images/statistics_user.png',
+                          labelTitle: 'สถิติผู้ใช้งานทั้งหมด',
+                          labelValue: '2,440 คน',
+                        ),
+                        StatisticImageBox(
+                          imagePath: 'assets/images/statistics_god.png',
+                          labelTitle: 'สถิติจำนวนองค์เทพ',
+                          labelValue: '6 องค์',
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
