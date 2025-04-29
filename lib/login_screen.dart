@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../routes/app_routes.dart';
-import 'register_screen.dart'; // อย่าลืม import หน้า Register ด้วยน้า
+import 'register_screen.dart';
+import 'main_screen.dart'; // เปลี่ยน import เป็น MainScreen
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -45,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 10), // ขึ้นไปเยอะขึ้น
+                      const SizedBox(height: 10),
                       const Text(
                         'เข้าสู่ระบบ',
                         style: TextStyle(
@@ -107,7 +108,11 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            // TODO: เขียนระบบ login ตรงนี้
+                            // เมื่อกด "ยืนยัน" จะพาไปหน้า MainScreen
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => const MainScreen()), // เปลี่ยนเป็น MainScreen
+                            );
                           },
                           child: const Text(
                             'ยืนยัน',
@@ -119,7 +124,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30), // ห่างปุ่ม "ยืนยัน" กับ "ยังไม่มีแอคเคาท์" เยอะขึ้น
+                      const SizedBox(height: 30),
                       const Text(
                         'ยังไม่มีแอคเคาท์',
                         style: TextStyle(fontSize: 15),
@@ -141,7 +146,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20), // เผื่อระยะห่างด้านล่าง
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),

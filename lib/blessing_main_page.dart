@@ -30,6 +30,27 @@ class BlessingMainPage extends StatelessWidget {
     double buttonHeight = kIsWeb ? size.width * 0.2 : size.width * 0.3;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Image.asset(
+            'assets/icons/back.png', // แทนที่ด้วย path ที่ถูกต้องของ back.png
+            width: 35,
+            height: 35,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_cart_outlined),
+            color: Colors.black87,
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -45,15 +66,6 @@ class BlessingMainPage extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 80), // เพิ่มพื้นที่ว่างด้านล่าง
               child: Stack(
                 children: [
-                  Positioned(
-                    top: 8,
-                    right: 16,
-                    child: IconButton(
-                      icon: const Icon(Icons.shopping_cart_outlined),
-                      color: Colors.black87,
-                      onPressed: () {},
-                    ),
-                  ),
                   Align(
                     alignment: Alignment.topCenter,
                     child: Padding(
