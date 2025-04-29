@@ -6,6 +6,7 @@ import 'package:boonday/login_screen.dart';
 import 'package:boonday/register_screen.dart';
 import 'package:boonday/register_screen2.dart';
 import 'package:boonday/register_screen3.dart';
+import 'package:boonday/history.dart';
 
 
 
@@ -18,6 +19,7 @@ class AppRoutes {
   static const String register2 = '/register2';
   static const String register3 = '/register3';
   static const totalStatistics = '/total-statistics';
+  static const String history = '/history';
 
 
   static Map<String, WidgetBuilder> routes = {
@@ -28,6 +30,7 @@ class AppRoutes {
     register: (context) => const RegisterScreen(),
     register2: (context) => const Register2Screen(),
     register3: (context) => const Register3Screen(),
+    history: (context) => const HistoryScreen(),
   };
 }
 

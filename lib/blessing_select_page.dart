@@ -8,37 +8,37 @@ class BlessingSelectPage extends StatelessWidget {
   static const List<BlessingItem> blessingItems = [
     BlessingItem(
       imagePath: 'assets/images/blessing_lakshmi.png',
-      title: 'ขอพร พระแม่ลักษมี',
+      title: 'ขอพรพระแม่ลักษมี',
       description: 'เทพแห่งความมั่งคั่ง เสริมโชคลาภทางการเงิน เหมาะสำหรับคนทำธุรกิจ หรือต้องการความมั่นคงทางการเงิน',
       price: 359,
     ),
     BlessingItem(
       imagePath: 'assets/images/blessing_luangpor_tanjai.png',
-      title: 'ขอพร หลวงพ่อทันใจ',
+      title: 'ขอพรหลวงพ่อทันใจ',
       description: 'ขึ้นชื่อเรื่อง "ขอแล้วได้" ไวมากเรื่องการงาน ความรัก และสุขภาพ เหมาะกับสายเร่งด่วน',
       price: 399,
     ),
     BlessingItem(
       imagePath: 'assets/images/blessing_ganesha.png',
-      title: 'ขอพร พระพิฆเนศ',
+      title: 'ขอพรพระพิฆเนศ',
       description: 'เทพแห่งปัญญาและความสำเร็จ เหมาะกับผู้เรียน-คนทำงานสายสร้างสรรค์ หรือนักธุรกิจที่ต้องการแรงบันดาลใจ',
       price: 349,
     ),
     BlessingItem(
       imagePath: 'assets/images/blessing_taowessuwan.png',
-      title: 'ขอพร องค์ท้าวเวสสุวรรณ',
+      title: 'ขอพรท้าวเวสสุวรรณ',
       description: 'เทพคุ้มครองป้องกันภัย ปรับดวง ปัดเคราะห์ เสริมความมั่นใจในช่วงชีวิตที่เปราะบาง',
       price: 289,
     ),
     BlessingItem(
       imagePath: 'assets/images/blessing_brahma.png',
-      title: 'ขอพร พระพรหม',
+      title: 'ขอพรพระพรหม',
       description: 'เทพเจ้าผู้ประทานพรเรื่องความรักและความสมดุลในชีวิต เหมาะกับคนที่กำลังเริ่มต้นใหม่',
       price: 379,
     ),
     BlessingItem(
       imagePath: 'assets/images/blessing_ikay_watjedee.png',
-      title: 'ขอพร ไอ้ไข่ วัดเจดีย์',
+      title: 'ขอพรไอ้ไข่วัดเจดีย์',
       description: 'ขอได้ ไหว้รับ! เน้นโชคลาภ-การเงิน-เสี่ยงดวง ปังไม่หยุด โดยเฉพาะสายค้าขายห้ามพลาด',
       price: 269,
     ),
