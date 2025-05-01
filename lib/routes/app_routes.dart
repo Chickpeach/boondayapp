@@ -6,7 +6,9 @@ import 'package:boonday/login_screen.dart';
 import 'package:boonday/register_screen.dart';
 import 'package:boonday/register_screen2.dart';
 import 'package:boonday/register_screen3.dart';
-import 'package:boonday/main_screen.dart'; // ✅ เพิ่มตรงนี้
+
+
+
 
 class AppRoutes {
   static const String splash = '/';
@@ -15,8 +17,8 @@ class AppRoutes {
   static const String register = '/register';
   static const String register2 = '/register2';
   static const String register3 = '/register3';
-  static const String totalStatistics = '/total-statistics';
-  static const String main = '/main'; //
+  static const totalStatistics = '/total-statistics';
+
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -26,6 +28,6 @@ class AppRoutes {
     register: (context) => const RegisterScreen(),
     register2: (context) => const Register2Screen(),
     register3: (context) => const Register3Screen(),
-    main: (context) => const MainScreen(), //
   };
 }
+
