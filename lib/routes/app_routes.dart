@@ -6,7 +6,11 @@ import 'package:boonday/login_screen.dart';
 import 'package:boonday/register_screen.dart';
 import 'package:boonday/register_screen2.dart';
 import 'package:boonday/register_screen3.dart';
-import 'package:boonday/main_screen.dart'; // ✅ เพิ่มตรงนี้
+import 'package:boonday/history.dart';
+import 'package:boonday/blessing_main_page.dart';
+import 'package:boonday/blessing_select_page.dart';
+import 'package:boonday/blessing_detail_page.dart';
+import 'package:boonday/main_screen.dart';
 
 class AppRoutes {
   static const String splash = '/';
@@ -16,7 +20,11 @@ class AppRoutes {
   static const String register2 = '/register2';
   static const String register3 = '/register3';
   static const String totalStatistics = '/total-statistics';
-  static const String main = '/main'; //
+  static const String history = '/history';
+  static const String blessingMain = '/blessing-main';
+  static const String blessingSelect = '/blessing-select';
+  static const String blessingDetail = '/blessing-detail';
+  static const String mainScreen = '/main-screen';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -26,6 +34,17 @@ class AppRoutes {
     register: (context) => const RegisterScreen(),
     register2: (context) => const Register2Screen(),
     register3: (context) => const Register3Screen(),
-    main: (context) => const MainScreen(), //
+    mainScreen: (context) => const MainScreen(),
+    history: (context) => const HistoryScreen(),
+    blessingMain: (context) => const BlessingMainPage(),
+    blessingSelect: (context) => const BlessingSelectPage(),
+    blessingDetail: (context) => BlessingDetailPage(
+      item: BlessingItem(
+        imagePath: 'assets/images/blessing_lakshmi.png',
+        title: 'ขอพรพระแม่ลักษมี',
+        description: 'เทพแห่งความมั่งคั่ง เสริมโชคลาภทางการเงิน เหมาะสำหรับคนทำธุรกิจ หรือต้องการความมั่นคงทางการเงิน',
+        price: 359,
+      ),
+    ),
   };
 }

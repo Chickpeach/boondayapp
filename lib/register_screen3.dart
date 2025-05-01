@@ -129,7 +129,7 @@ class Register3Screen extends StatelessWidget {
                           ),
                           onPressed: () {
                             // กดปุ่มยืนยันทำอะไรต่อได้ที่นี่
-                            Navigator.pushNamed(context, AppRoutes.home);
+                            Navigator.pushNamed(context, AppRoutes.history);
                           },
                           child: const Text(
                             'ยืนยัน',

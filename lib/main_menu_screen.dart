@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:boonday/routes/app_routes.dart'; // Import your AppRoutes
 
 class MainMenuScreen extends StatefulWidget {
-  const MainMenuScreen({super.key});
+  const MainMenuScreen({Key? key}) : super(key: key);
 
   @override
-  State<MainMenuScreen> createState() => _MainMenuScreenState();
+  _MainMenuScreenState createState() => _MainMenuScreenState();
 }
 
 class _MainMenuScreenState extends State<MainMenuScreen> {
@@ -20,7 +21,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
         elevation: 0,
         leading: IconButton(
           icon: Image.asset(
-            'assets/icons/back.png', // แทนที่ด้วย path ที่ถูกต้องของ back.png
+            'assets/icons/back.png',
             width: 30,
             height: 30,
           ),
@@ -56,8 +57,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                 setState(() {
                   _selectedIndex = 1;
                 });
-                // TODO: ไปที่หน้าประวัติการทำบุญ
-                print('ไปที่หน้าประวัติการทำบุญ');
+                Navigator.pushNamed(context, AppRoutes.history); // Navigate to history
               }),
               _buildMenuItem(context, 'หน้าหลัก', 2, () {
                 setState(() {
@@ -134,33 +134,33 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          backgroundColor: accentPink, // ใช้สี accentPink โดยตรง
+          backgroundColor: accentPink,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0), // ขอบโค้งมนมากขึ้น
+            borderRadius: BorderRadius.circular(20.0),
           ),
           title: const Text(
             'ยืนยันออกจากระบบ',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
-              fontSize: 26, // ปรับขนาดตัวอักษร
+              fontSize: 26,
             ),
             textAlign: TextAlign.center,
           ),
-          content: const SizedBox(height: 0), // เพิ่มระยะห่างระหว่าง title กับ actions
+          content: const SizedBox(height: 0),
           actions: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround, // จัดปุ่มให้มีระยะห่างเท่ากัน
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(dialogContext).pop(); // ปิด Dialog
+                    Navigator.of(dialogContext).pop();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey[300], // สีเทาอ่อน
+                    backgroundColor: Colors.grey[300],
                     foregroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0), // ขอบโค้งมน
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                   ),
@@ -168,16 +168,15 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(dialogContext).pop(); // ปิด Dialog
+                    Navigator.of(dialogContext).pop();
                     Navigator.popUntil(context, (route) => route.isFirst);
-                    // TODO: ทำการออกจากระบบจริง (เช่น ล้าง Session, ไปหน้า Login)
                     print('ออกจากระบบ');
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.tealAccent[400], // สีเขียว
+                    backgroundColor: Colors.tealAccent[400],
                     foregroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0), // ขอบโค้งมน
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                   ),
@@ -185,9 +184,9 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 15), // เพิ่มระยะห่างด้านล่างปุ่ม
+            const SizedBox(height: 15),
           ],
-          actionsAlignment: MainAxisAlignment.center, // จัด actions ให้อยู่ตรงกลาง (เผื่อมีปุ่มเดียว)
+          actionsAlignment: MainAxisAlignment.center,
         );
       },
     );
