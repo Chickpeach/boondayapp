@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:boonday/routes/app_routes.dart'; // Import AppRoutes
 import 'fortune_detail_page.dart';
 
 class FortuneBoostPage extends StatelessWidget {
@@ -46,28 +47,9 @@ class FortuneBoostPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: kIsWeb
-          ? Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(
-              'assets/images/Bg.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          const _FortuneContent(),
-        ],
-      )
-          : Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/Bg.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: const _FortuneContent(),
-      ),
+    return const Scaffold(
+      backgroundColor: Colors.white, // กำหนดสีพื้นหลังเป็นสีขาว
+      body: _FortuneContent(),
     );
   }
 }
@@ -103,7 +85,7 @@ class _FortuneContent extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    // ไปหน้าตะกร้า
+                    Navigator.pushNamed(context, AppRoutes.cart); // เพิ่ม Navigator.pushNamed ที่นี่
                   },
                 ),
               ],

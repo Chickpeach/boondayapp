@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'blessing_detail_page.dart';
+import 'package:boonday/routes/app_routes.dart'; // Import AppRoutes
 
 class BlessingSelectPage extends StatelessWidget {
   const BlessingSelectPage({Key? key}) : super(key: key);
@@ -46,28 +47,9 @@ class BlessingSelectPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: kIsWeb
-          ? Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(
-              'assets/images/Bg.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          const BlessingContent(),
-        ],
-      )
-          : Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/Bg.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: const BlessingContent(),
-      ),
+    return const Scaffold(
+      backgroundColor: Colors.white, // กำหนดสีพื้นหลังเป็นสีขาว
+      body: BlessingContent(),
     );
   }
 }
@@ -97,7 +79,7 @@ class BlessingContent extends StatelessWidget {
                   IconButton(
                     icon: Image.asset('assets/icons/cart.png', width: 28, height: 28), // ใช้รูป cart.png
                     onPressed: () {
-                      // TODO: ไปหน้าตะกร้า
+                      Navigator.pushNamed(context, AppRoutes.cart); // ไปหน้าตะกร้า
                     },
                   ),
                 ],

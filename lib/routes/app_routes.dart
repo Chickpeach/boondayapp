@@ -11,6 +11,7 @@ import 'package:boonday/blessing_main_page.dart';
 import 'package:boonday/blessing_select_page.dart';
 import 'package:boonday/blessing_detail_page.dart';
 import 'package:boonday/main_screen.dart';
+import 'package:boonday/cart/cart_screen.dart'; // Import CartScreen
 
 class AppRoutes {
   static const String splash = '/';
@@ -25,6 +26,7 @@ class AppRoutes {
   static const String blessingSelect = '/blessing-select';
   static const String blessingDetail = '/blessing-detail';
   static const String mainScreen = '/main-screen';
+  static const String cart = '/cart'; // Add cart route
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -46,5 +48,6 @@ class AppRoutes {
         price: 359,
       ),
     ),
+    cart: (context) => const CartScreen(), // Map cart route to CartScreen
   };
 }

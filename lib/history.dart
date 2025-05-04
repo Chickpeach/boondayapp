@@ -36,7 +36,7 @@ class HistoryScreen extends StatelessWidget {
                       color: Colors.green[800],
                     ),
                   ),
-                  // ปุ่มตะกร้าสินค้า เปลี่ยนเป็น cart.png
+                  // ปุ่มตะกร้าสินค้า เปลี่ยนเป็น cart.png และนำทางไปหน้า CartScreen
                   IconButton(
                     icon: Image.asset(
                       'assets/icons/cart.png',
@@ -44,7 +44,7 @@ class HistoryScreen extends StatelessWidget {
                       height: 28,
                     ),
                     onPressed: () {
-                      // TODO: ไปหน้าตะกร้า
+                      Navigator.pushNamed(context, AppRoutes.cart); // นำทางไปยัง CartScreen
                     },
                   ),
                 ],

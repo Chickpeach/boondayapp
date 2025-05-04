@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'main_menu_screen.dart';
 import 'blessing_main_page.dart' as blessing;
-import 'make_merit_main.dart' as merit; // ใช้ import แบบระบุชื่อ
+import 'make_merit_main.dart' as merit;
+import 'package:boonday/routes/app_routes.dart'; // Import AppRoutes
 
 class WishingScreen extends StatelessWidget {
   const WishingScreen({super.key});
@@ -10,7 +11,22 @@ class WishingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('ขอพร & เสริมดวง')),
+      appBar: AppBar(
+        title: const Text('ขอพร & เสริมดวง'),
+        actions: [
+          IconButton(
+            icon: Image.asset(
+              'assets/icons/cart.png',
+              width: 30,
+              height: 30,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.cart);
+            },
+          ),
+          const SizedBox(width: 8),
+        ],
+      ),
       body: const Center(child: Text('หน้าจอสำหรับ ขอพร & เสริมดวง')),
     );
   }
@@ -22,7 +38,22 @@ class DonateFoundationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('บริจาคมูลนิธิ')),
+      appBar: AppBar(
+        title: const Text('บริจาคมูลนิธิ'),
+        actions: [
+          IconButton(
+            icon: Image.asset(
+              'assets/icons/cart.png',
+              width: 30,
+              height: 30,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.cart);
+            },
+          ),
+          const SizedBox(width: 8),
+        ],
+      ),
       body: const Center(child: Text('หน้าจอสำหรับ บริจาคมูลนิธิ')),
     );
   }
@@ -46,12 +77,12 @@ class MainScreen extends StatelessWidget {
         if (title == 'ตักบาตร & ทำบุญ') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => blessing.BlessingMainPage()), // เรียกจาก blessing_main_page.dart
+            MaterialPageRoute(builder: (context) => blessing.BlessingMainPage()),
           );
         } else if (title == 'ขอพร & เสริมดวง') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => merit.MakeMeritMainPage()), // เรียกจาก make_merit_main.dart
+            MaterialPageRoute(builder: (context) => merit.MakeMeritMainPage()),
           );
         } else if (title == 'บริจาคมูลนิธิ') {
           Navigator.push(
@@ -113,8 +144,7 @@ class MainScreen extends StatelessWidget {
               height: 30,
             ),
             onPressed: () {
-              print('ไปที่หน้าตะกร้าสินค้า');
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen()));
+              Navigator.pushNamed(context, AppRoutes.cart);
             },
           ),
           const SizedBox(width: 8),

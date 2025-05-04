@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:boonday/watchonglom.dart';
 import 'package:boonday/wathuarumpong.dart';
 import 'package:boonday/watyannawa.dart';
-import 'fortune_boost_page.dart' as fortune_boost;
+import 'package:boonday/routes/app_routes.dart'; // Import AppRoutes
 
 void main() {
   runApp(const MakeMeritApp());
@@ -103,8 +103,10 @@ class MakeMeritMainPage extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          icon: Image.asset('assets/icons/cart.png', width: 28, height: 28), // ใช้รูป cart.png
-          onPressed: () {},
+          icon: Image.asset('assets/icons/cart.png', width: 28, height: 28),
+          onPressed: () {
+            Navigator.pushNamed(context, AppRoutes.cart); // Navigate to CartScreen
+          },
         ),
       ],
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'blessing_select_page.dart';
 import 'fortune_boost_page.dart' as fortune_boost;
+import 'package:boonday/routes/app_routes.dart'; // Import AppRoutes
 
 void main() {
   runApp(const MyApp());
@@ -33,17 +34,12 @@ class BlessingMainPage extends StatelessWidget {
 
     return Scaffold(
       appBar: _buildAppBar(context),
+      backgroundColor: Colors.white,
       body: Center(
         child: Container(
           constraints: BoxConstraints(maxWidth: maxWidth),
           width: double.infinity,
           height: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/Bg.png'),
-              fit: BoxFit.cover,
-            ),
-          ),
           child: SafeArea(
             child: kIsWeb
                 ? Stack(
@@ -60,14 +56,15 @@ class BlessingMainPage extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: _buildContent(buttonWidth, buttonHeight, context),
+                          children:
+                          _buildContent(buttonWidth, buttonHeight, context),
                         ),
                       ),
                     ),
                   ),
                 ),
                 Positioned(
-                  right: 0, // ให้ scrollbar ชิดขวาสุด
+                  right: 0,
                   top: 0,
                   bottom: 0,
                   child: SizedBox(
@@ -101,8 +98,10 @@ class BlessingMainPage extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          icon: Image.asset('assets/icons/cart.png', width: 28, height: 28), // ใช้รูป cart.png
-          onPressed: () {},
+          icon: Image.asset('assets/icons/cart.png', width: 28, height: 28),
+          onPressed: () {
+            Navigator.pushNamed(context, AppRoutes.cart); // ไปยัง CartScreen
+          },
         ),
       ],
     );
@@ -118,7 +117,8 @@ class BlessingMainPage extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildContent(double buttonWidth, double buttonHeight, BuildContext context) {
+  List<Widget> _buildContent(
+      double buttonWidth, double buttonHeight, BuildContext context) {
     return [
       const SizedBox(height: 80),
       _buildHeaderText('ขอเบา ๆ', 60),
@@ -148,7 +148,8 @@ class BlessingMainPage extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const fortune_boost.FortuneBoostPage()),
+            MaterialPageRoute(
+                builder: (context) => const fortune_boost.FortuneBoostPage()),
           );
         },
       ),
@@ -209,7 +210,8 @@ class BounceButton extends StatefulWidget {
   State<BounceButton> createState() => _BounceButtonState();
 }
 
-class _BounceButtonState extends State<BounceButton> with SingleTickerProviderStateMixin {
+class _BounceButtonState extends State<BounceButton>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -267,7 +269,11 @@ class _BounceButtonState extends State<BounceButton> with SingleTickerProviderSt
           ),
         ),
         const SizedBox(height: 16),
-        Text(widget.text, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green)),
+        Text(widget.text,
+            style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.green)),
       ],
     );
   }

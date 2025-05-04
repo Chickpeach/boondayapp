@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:boonday/routes/app_routes.dart'; // Import AppRoutes
+import 'cart/cart_provider.dart'; // แก้ไข 'path/to/' ให้ถูกต้อง
+import 'package:provider/provider.dart'; // ถ้าใช้ Provider
+import 'cart/CartMakemerit_Item.dart';
 
 // คลาสหลักสำหรับหน้า Wat Yannawa
 class WatYannawa extends StatelessWidget {
@@ -7,6 +11,7 @@ class WatYannawa extends StatelessWidget {
   const WatYannawa({Key? key, this.item}) : super(key: key);
 
   static const List<MakemeritItem> makemeritItems = [
+    // ... รายการ MakemeritItem ...
     MakemeritItem(
       imagePath: 'assets/images/yannawaone.jpg',
       title: 'สังฆทานรักษาโรค',
@@ -51,13 +56,6 @@ class WatYannawa extends StatelessWidget {
       backgroundColor: Colors.white, // เพิ่ม backgroundColor ที่นี่
       body: Stack(
         children: [
-          // ถ้าไม่ต้องการพื้นหลังที่เป็นรูปภาพอีกต่อไป ให้คอมเมนต์ส่วนนี้หรือลบทิ้งได้เลยค่ะ
-          /*Positioned.fill(
-            child: Image.asset(
-              'assets/images/Bg.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),*/
           const MakemeritContent(),
         ],
       ),
@@ -90,7 +88,7 @@ class MakemeritContent extends StatelessWidget {
                   IconButton(
                     icon: Image.asset('assets/icons/cart.png', width: 35, height: 35), // ใช้รูป cart.png
                     onPressed: () {
-                      // ไปหน้าตะกร้า
+                      Navigator.pushNamed(context, AppRoutes.cart); // ไปหน้าตะกร้า
                     },
                   ),
                 ],
@@ -170,6 +168,7 @@ class MakemeritItemCard extends StatelessWidget {
         );
       },
       child: Container(
+        // ... การตกแต่ง Card ...
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           color: Colors.white.withOpacity(0.9),
@@ -211,8 +210,8 @@ class MakemeritItemCard extends StatelessWidget {
                         color: Colors.deepPurple,
                         fontFamily: 'NotoSansThai',
                       ),
-                      maxLines: 2, // จำกัดให้แสดง 2 บรรทัด
-                      overflow: TextOverflow.ellipsis, // ถ้าเกินให้แสดง ...
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 6),
                     Text(
@@ -235,11 +234,32 @@ class MakemeritItemCard extends StatelessWidget {
   }
 }
 
-// หน้ารายละเอียดไอเทม
-class ItemDetailScreen extends StatelessWidget {
+// หน้ารายละเอียดไอเทม ( StatefulWidget )
+class ItemDetailScreen extends StatefulWidget {
   final MakemeritItem item;
 
   const ItemDetailScreen({Key? key, required this.item}) : super(key: key);
+
+  @override
+  State<ItemDetailScreen> createState() => _ItemDetailScreenState();
+}
+
+class _ItemDetailScreenState extends State<ItemDetailScreen> {
+  int _quantity = 1;
+
+  void _incrementQuantity() {
+    setState(() {
+      _quantity++;
+    });
+  }
+
+  void _decrementQuantity() {
+    if (_quantity > 1) {
+      setState(() {
+        _quantity--;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -253,12 +273,14 @@ class ItemDetailScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: Image.asset('assets/icons/cart.png', width: 35, height: 35), // ใช้รูป cart.png
-            onPressed: () {},
+            icon: Image.asset('assets/icons/cart.png', width: 35, height: 35),
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.cart); // ไปหน้าตะกร้า
+            },
           ),
         ],
       ),
-      backgroundColor: Colors.white, // เพิ่ม backgroundColor ที่นี่
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -272,7 +294,7 @@ class ItemDetailScreen extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(25.0),
                     child: Image.asset(
-                      item.imagePath,
+                      widget.item.imagePath,
                       width: 320.0,
                       height: 180.0,
                       fit: BoxFit.cover,
@@ -281,12 +303,12 @@ class ItemDetailScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  item.title,
+                  widget.item.title,
                   style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'NotoSansThai'),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '${item.price} บาท',
+                  '${widget.item.price} บาท',
                   style: const TextStyle(fontSize: 18, color: Color(0xFF19C3A3), fontFamily: 'NotoSansThai', fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 16),
@@ -298,7 +320,7 @@ class ItemDetailScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-                    item.description,
+                    widget.item.description,
                     style: const TextStyle(
                       fontSize: 16,
                       fontFamily: 'NotoSansThai',
@@ -332,20 +354,20 @@ class ItemDetailScreen extends StatelessWidget {
                             radius: 18,
                             child: IconButton(
                               icon: const Icon(Icons.add),
-                              onPressed: () {},
+                              onPressed: _incrementQuantity,
                               color: Colors.black87,
                               iconSize: 20,
                             ),
                           ),
                           const SizedBox(width: 8),
-                          const Text('1', style: TextStyle(fontSize: 18, fontFamily: 'NotoSansThai')),
+                          Text('$_quantity', style: const TextStyle(fontSize: 18, fontFamily: 'NotoSansThai')),
                           const SizedBox(width: 8),
                           CircleAvatar(
                             backgroundColor: Colors.white,
                             radius: 18,
                             child: IconButton(
                               icon: const Icon(Icons.remove),
-                              onPressed: () {},
+                              onPressed: _decrementQuantity,
                               color: Colors.black87,
                               iconSize: 20,
                             ),
@@ -354,15 +376,32 @@ class ItemDetailScreen extends StatelessWidget {
                       ),
                       const Spacer(),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          final cartProvider = Provider.of<CartProvider>(context, listen: false);
+                          final cartMakemeritItem = CartMakemeritItem(
+                            title: widget.item.title,
+                            price: widget.item.price.toDouble(),
+                            description: widget.item.description,
+                            imagePath: widget.item.imagePath,
+                          );
+                          cartProvider.addItem(
+                            cartMakemeritItem,
+                            widget.item.price.toDouble(),
+                            _quantity, // ส่งจำนวนที่เลือก
+                          );
+                          print('Add $_quantity of ${widget.item.title} to cart');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('เพิ่ม ${widget.item.title} x $_quantity ลงในตะกร้าแล้ว')),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF19C3A3),
+                          backgroundColor: const Color(0xFF19C3A3), // กำหนดสีที่นี่
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                         ),
                         child: const Text(
-                          'ADD TO CART',
+                          'เพิ่มลงตะกร้า',
                           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'NotoSansThai'),
                         ),
                       ),
