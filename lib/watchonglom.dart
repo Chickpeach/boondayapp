@@ -88,6 +88,7 @@ class ChongLomContent extends StatelessWidget {
                     },
                   ),
                   IconButton(
+                    icon: Image.asset('assets/icons/cart.png', width: 35, height: 35), // ใช้รูป cart.png
                     onPressed: () {
                       // ไปหน้าตะกร้า
                     },
@@ -252,6 +253,8 @@ class ItemDetailScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
+            icon: Image.asset('assets/icons/cart.png', width: 35, height: 35), // ใช้รูป cart.png
+            onPressed: () {  },
           ),
         ],
       ),

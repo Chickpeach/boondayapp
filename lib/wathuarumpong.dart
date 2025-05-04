@@ -88,6 +88,7 @@ class MakemeritContent extends StatelessWidget {
                     },
                   ),
                   IconButton(
+                    icon: Image.asset('assets/icons/cart.png', width: 35, height: 35), // ใช้รูป cart.png
                     onPressed: () {
                       // TODO: ไปหน้าตะกร้า
                     },
@@ -254,6 +255,7 @@ class ItemDetailScreen extends StatelessWidget {
         ),
         actions: [ // เพิ่ม actions สำหรับไอคอนตะกร้าสินค้าทางขวา
           IconButton(
+            icon: Image.asset('assets/icons/cart.png', width: 35, height: 35), // ใช้รูป cart.png
             onPressed: () {
               // TODO: ไปหน้าตะกร้าสินค้า
               print('ไปหน้าตะกร้าสินค้า');
