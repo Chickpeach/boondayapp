@@ -95,7 +95,7 @@ class BlessingContent extends StatelessWidget {
                     },
                   ),
                   IconButton(
-                    icon: const Icon(Icons.shopping_cart_outlined),
+                    icon: Image.asset('assets/icons/cart.png', width: 28, height: 28), // ใช้รูป cart.png
                     onPressed: () {
                       // TODO: ไปหน้าตะกร้า
                     },

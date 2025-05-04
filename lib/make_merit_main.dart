@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'blessing_select_page.dart';
+import 'package:boonday/watchonglom.dart';
+import 'package:boonday/wathuarumpong.dart';
+import 'package:boonday/watyannawa.dart';
 import 'fortune_boost_page.dart' as fortune_boost;
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MakeMeritApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MakeMeritApp extends StatelessWidget {
+  const MakeMeritApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const BlessingMainPage(),
+      home: const MakeMeritMainPage(),
     );
   }
 }
 
-class BlessingMainPage extends StatelessWidget {
-  const BlessingMainPage({super.key});
+class MakeMeritMainPage extends StatelessWidget {
+  const MakeMeritMainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +79,7 @@ class BlessingMainPage extends StatelessWidget {
                       thumbVisibility: true,
                       child: SingleChildScrollView(
                         controller: scrollController,
-                        child: Container(),
+                        child: Container(), // ป้องกัน error โดยใช้ empty container
                       ),
                     ),
                   ),
@@ -96,7 +98,7 @@ class BlessingMainPage extends StatelessWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       leading: IconButton(
-        icon: Image.asset('assets/icons/back.png', width: 35, height: 35),
+        icon: const Icon(Icons.arrow_back_ios, color: Colors.black87),
         onPressed: () => Navigator.pop(context),
       ),
       actions: [
@@ -121,34 +123,47 @@ class BlessingMainPage extends StatelessWidget {
   List<Widget> _buildContent(double buttonWidth, double buttonHeight, BuildContext context) {
     return [
       const SizedBox(height: 80),
-      _buildHeaderText('ขอเบา ๆ', 60),
+      _buildHeaderText('จะมูให้แม่น!', 60),
       const SizedBox(height: 12),
-      _buildHeaderText('แต่ได้หนัก ๆ', 52),
+      _buildHeaderText('ต้องเริ่มวัดที่ใช่', 52),
       const SizedBox(height: 24),
-      _buildSubHeaderText('เสริมพลัง ปลอดภัย อุ่นใจทุกวัน'),
-      const SizedBox(height: 48),
+      _buildSubHeaderText('เลือกวัดที่ต้องการทำบุญ'),
+      const SizedBox(height: 30),
       BounceButton(
-        imagePath: 'assets/images/blessing.png',
+        imagePath: 'assets/images/watone.png',
         width: buttonWidth,
         height: buttonHeight,
-        text: 'ขอพร เสริมดวงประจำวัน',
+        text: 'วัดหัวลำโพง',
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const BlessingSelectPage()),
+            MaterialPageRoute(builder: (context) => const Wathuarumpong()),
           );
         },
       ),
-      const SizedBox(height: 32),
+      const SizedBox(height: 20),
       BounceButton(
-        imagePath: 'assets/images/personal_luck_boost.png',
+        imagePath: 'assets/images/wattwo.png',
         width: buttonWidth,
         height: buttonHeight,
-        text: 'ของดีประจำตัว',
+        text: 'วัดยานนาวา',
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const fortune_boost.FortuneBoostPage()),
+            MaterialPageRoute(builder: (context) => const WatYannawa()),
+          );
+        },
+      ),
+      const SizedBox(height: 20),
+      BounceButton(
+        imagePath: 'assets/images/watthree.png',
+        width: buttonWidth,
+        height: buttonHeight,
+        text: 'วัดช่องลม',
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const WatChongLom()),
           );
         },
       ),

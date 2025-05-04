@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:boonday/routes/app_routes.dart'; // Import your AppRoutes
+import 'blessing_main_page.dart'; // Import the BlessingMainPage (อาจจะไม่ได้ใช้แล้ว)
+import 'make_merit_main.dart'; // Import MakeMeritMainPage
 
 class MainMenuScreen extends StatefulWidget {
   const MainMenuScreen({Key? key}) : super(key: key);
@@ -50,7 +52,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                 setState(() {
                   _selectedIndex = 0;
                 });
-                // TODO: ไปที่หน้าบัญชีผู้ใช้
+                // TODO: ไปที่หน้าบัญชีผู้ใช้ (ถ้ามี)
                 print('ไปที่หน้าบัญชีผู้ใช้');
               }),
               _buildMenuItem(context, 'ประวัติการทำบุญ', 1, () {
@@ -69,21 +71,25 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                 setState(() {
                   _selectedIndex = 3;
                 });
-                // TODO: ไปที่หน้าตักบาตร & ทำบุญ
-                print('ไปที่หน้าตักบาตร & ทำบุญ');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const BlessingMainPage()), // ยังคงเชื่อมไป BlessingMainPage ตามเดิม
+                );
               }),
               _buildMenuItem(context, 'ขอพร & เสริมดวง', 4, () {
                 setState(() {
                   _selectedIndex = 4;
                 });
-                // TODO: ไปที่หน้าขอพร & เสริมดวง
-                print('ไปที่หน้าขอพร & เสริมดวง');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MakeMeritMainPage()),
+                );
               }),
               _buildMenuItem(context, 'บริจาคมูลนิธิ', 5, () {
                 setState(() {
                   _selectedIndex = 5;
                 });
-                // TODO: ไปที่หน้าบริจาคมูลนิธิ
+                // TODO: ไปที่หน้าบริจาคมูลนิธิ (ถ้ามี)
                 print('ไปที่หน้าบริจาคมูลนิธิ');
               }),
               _buildMenuItem(context, 'ออกจากระบบ', 6, () {

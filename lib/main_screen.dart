@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'main_menu_screen.dart';
 import 'blessing_main_page.dart';
+import 'make_merit_main.dart'; // เพิ่ม import นี้
 
 class WishingScreen extends StatelessWidget {
   const WishingScreen({super.key});
@@ -50,7 +51,7 @@ class MainScreen extends StatelessWidget {
         } else if (title == 'ขอพร & เสริมดวง') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const WishingScreen()),
+            MaterialPageRoute(builder: (context) => const MakeMeritMainPage()), // เปลี่ยนตรงนี้
           );
         } else if (title == 'บริจาคมูลนิธิ') {
           Navigator.push(
@@ -94,8 +95,8 @@ class MainScreen extends StatelessWidget {
         leading: IconButton(
           icon: Image.asset(
             'assets/icons/bars.png',
-            width: 30,
-            height: 30,
+            width: 28,
+            height: 28,
           ),
           onPressed: () {
             Navigator.push(

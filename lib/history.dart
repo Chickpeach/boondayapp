@@ -16,17 +16,18 @@ class HistoryScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Replace the Icon with IconButton
+                  // ปุ่มย้อนกลับ
                   IconButton(
                     icon: Image.asset(
-                      'assets/icons/back.png', // Ensure this path is correct
+                      'assets/icons/back.png',
                       width: 28,
                       height: 28,
                     ),
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, AppRoutes.mainScreen); // This will navigate back to MainScreen
+                      Navigator.pushReplacementNamed(context, AppRoutes.mainScreen);
                     },
                   ),
+                  // หัวข้อ
                   Text(
                     'ประวัติการทำบุญ',
                     style: TextStyle(
@@ -35,13 +36,23 @@ class HistoryScreen extends StatelessWidget {
                       color: Colors.green[800],
                     ),
                   ),
-                  Icon(Icons.shopping_cart_outlined, size: 28),
+                  // ปุ่มตะกร้าสินค้า เปลี่ยนเป็น cart.png
+                  IconButton(
+                    icon: Image.asset(
+                      'assets/icons/cart.png',
+                      width: 28,
+                      height: 28,
+                    ),
+                    onPressed: () {
+                      // TODO: ไปหน้าตะกร้า
+                    },
+                  ),
                 ],
               ),
             ),
             Expanded(
               child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 children: const [
                   DonationCard(
                     organization: 'มูลนิธิศูนย์พักก์',

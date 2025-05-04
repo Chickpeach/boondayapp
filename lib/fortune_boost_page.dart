@@ -98,7 +98,7 @@ class _FortuneContent extends StatelessWidget {
                     width: 28,
                     height: 28,
                     child: Image.asset(
-                      'assets/icons/shopping-cart.png',
+                      'assets/icons/cart.png',
                       fit: BoxFit.contain,
                     ),
                   ),
