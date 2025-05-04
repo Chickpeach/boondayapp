@@ -65,6 +65,7 @@ class Wathuarumpong extends StatelessWidget {
     );
   }
 }
+
 class MakemeritContent extends StatelessWidget {
   const MakemeritContent({Key? key}) : super(key: key);
 
@@ -238,10 +239,31 @@ class MakemeritItemCard extends StatelessWidget {
 }
 
 // Widget สำหรับแสดงรายละเอียดไอเทม (ปรับปรุงให้สั้นลงและยกขึ้นจากด้านล่าง)
-class ItemDetailScreen extends StatelessWidget {
+class ItemDetailScreen extends StatefulWidget { // เปลี่ยนเป็น StatefulWidget
   final MakemeritItem item;
 
   const ItemDetailScreen({Key? key, required this.item}) : super(key: key);
+
+  @override
+  State<ItemDetailScreen> createState() => _ItemDetailScreenState();
+}
+
+class _ItemDetailScreenState extends State<ItemDetailScreen> {
+  int _quantity = 1;
+
+  void _incrementQuantity() {
+    setState(() {
+      _quantity++;
+    });
+  }
+
+  void _decrementQuantity() {
+    if (_quantity > 1) {
+      setState(() {
+        _quantity--;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -277,7 +299,7 @@ class ItemDetailScreen extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(25.0),
                     child: Image.asset(
-                      item.imagePath,
+                      widget.item.imagePath,
                       width: 320.0,
                       height: 180.0,
                       fit: BoxFit.cover,
@@ -286,12 +308,12 @@ class ItemDetailScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  item.title,
+                  widget.item.title,
                   style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'NotoSansThai'),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '${item.price} บาท',
+                  '${widget.item.price} บาท',
                   style: TextStyle(fontSize: 18, color: const Color(0xFF19C3A3), fontFamily: 'NotoSansThai', fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 16),
@@ -303,7 +325,7 @@ class ItemDetailScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-                    item.description,
+                    widget.item.description,
                     style: const TextStyle(
                       fontSize: 16,
                       fontFamily: 'NotoSansThai',
@@ -339,24 +361,20 @@ class ItemDetailScreen extends StatelessWidget {
                             radius: 18,
                             child: IconButton(
                               icon: const Icon(Icons.add),
-                              onPressed: () {
-                                // TODO: เพิ่มจำนวน
-                              },
+                              onPressed: _incrementQuantity, // เรียกฟังก์ชันเพิ่มจำนวน
                               color: Colors.black87,
                               iconSize: 20,
                             ),
                           ),
                           const SizedBox(width: 8),
-                          const Text('1', style: TextStyle(fontSize: 18, fontFamily: 'NotoSansThai')),
+                          Text('$_quantity', style: const TextStyle(fontSize: 18, fontFamily: 'NotoSansThai')), // แสดงจำนวน
                           const SizedBox(width: 8),
                           CircleAvatar(
                             backgroundColor: Colors.white,
                             radius: 18,
                             child: IconButton(
                               icon: const Icon(Icons.remove),
-                              onPressed: () {
-                                // TODO: ลดจำนวน
-                              },
+                              onPressed: _decrementQuantity, // เรียกฟังก์ชันลดจำนวน
                               color: Colors.black87,
                               iconSize: 20,
                             ),
@@ -367,6 +385,7 @@ class ItemDetailScreen extends StatelessWidget {
                       ElevatedButton(
                         onPressed: () {
                           // TODO: เพิ่มลงตะกร้า
+                          print('เพิ่ม $_quantity ${widget.item.title} ลงตะกร้า');
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF19C3A3),

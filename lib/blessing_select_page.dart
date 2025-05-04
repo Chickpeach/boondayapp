@@ -46,28 +46,9 @@ class BlessingSelectPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: kIsWeb
-          ? Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(
-              'assets/images/Bg.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          const BlessingContent(),
-        ],
-      )
-          : Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/Bg.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: const BlessingContent(),
-      ),
+    return const Scaffold(
+      backgroundColor: Colors.white, // กำหนดสีพื้นหลังเป็นสีขาว
+      body: BlessingContent(),
     );
   }
 }

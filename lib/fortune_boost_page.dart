@@ -46,28 +46,9 @@ class FortuneBoostPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: kIsWeb
-          ? Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(
-              'assets/images/Bg.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          const _FortuneContent(),
-        ],
-      )
-          : Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/Bg.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: const _FortuneContent(),
-      ),
+    return const Scaffold(
+      backgroundColor: Colors.white, // กำหนดสีพื้นหลังเป็นสีขาว
+      body: _FortuneContent(),
     );
   }
 }

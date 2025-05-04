@@ -33,17 +33,13 @@ class BlessingMainPage extends StatelessWidget {
 
     return Scaffold(
       appBar: _buildAppBar(context),
+      backgroundColor: Colors.white, // กำหนดสีพื้นหลังเป็นสีขาวที่นี่
       body: Center(
         child: Container(
           constraints: BoxConstraints(maxWidth: maxWidth),
           width: double.infinity,
           height: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/Bg.png'),
-              fit: BoxFit.cover,
-            ),
-          ),
+          // Removed BoxDecoration for background image
           child: SafeArea(
             child: kIsWeb
                 ? Stack(
