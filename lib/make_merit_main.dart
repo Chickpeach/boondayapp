@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:boonday/watchonglom.dart';
 import 'package:boonday/wathuarumpong.dart';
 import 'package:boonday/watyannawa.dart';
@@ -27,17 +25,9 @@ class MakeMeritMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    ScrollController scrollController = ScrollController();
 
-    double buttonWidth = kIsWeb ? 400 : size.width * 0.7;
-    double buttonHeight = kIsWeb ? 120 : size.width * 0.3;
-    double maxWidth = kIsWeb ? 600 : double.infinity;
 
     return Scaffold(
-      appBar: _buildAppBar(context),
-      body: Center(
-        child: Container(
-          constraints: BoxConstraints(maxWidth: maxWidth),
           width: double.infinity,
           height: double.infinity,
           decoration: const BoxDecoration(
@@ -47,87 +37,17 @@ class MakeMeritMainPage extends StatelessWidget {
             ),
           ),
           child: SafeArea(
-            child: kIsWeb
-                ? Stack(
               children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    width: 600,
-                    child: Scrollbar(
-                      controller: scrollController,
-                      thumbVisibility: true,
-                      child: SingleChildScrollView(
-                        controller: scrollController,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: _buildContent(buttonWidth, buttonHeight, context),
-                        ),
-                      ),
-                    ),
                   ),
                 ),
                 Positioned(
-                  right: 0, // ให้ scrollbar ชิดขวาสุด
-                  top: 0,
-                  bottom: 0,
-                  child: SizedBox(
-                    width: 12,
-                    child: Scrollbar(
-                      controller: scrollController,
-                      thumbVisibility: true,
-                      child: SingleChildScrollView(
-                        controller: scrollController,
-                        child: Container(), // ป้องกัน error โดยใช้ empty container
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            )
-                : _buildMobileLayout(context, size),
-          ),
-        ),
-      ),
-    );
-  }
-
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios, color: Colors.black87),
-        onPressed: () => Navigator.pop(context),
-      ),
-      actions: [
-        IconButton(
-          icon: Image.asset('assets/icons/cart.png', width: 28, height: 28), // ใช้รูป cart.png
           onPressed: () {},
         ),
-      ],
-    );
-  }
-
-  Widget _buildMobileLayout(BuildContext context, Size size) {
-    return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: _buildContent(size.width * 0.7, size.width * 0.3, context),
       ),
-    );
-  }
-
-  List<Widget> _buildContent(double buttonWidth, double buttonHeight, BuildContext context) {
-    return [
-      const SizedBox(height: 80),
-      _buildHeaderText('จะมูให้แม่น!', 60),
       const SizedBox(height: 12),
-      _buildHeaderText('ต้องเริ่มวัดที่ใช่', 52),
       const SizedBox(height: 24),
-      _buildSubHeaderText('เลือกวัดที่ต้องการทำบุญ'),
       const SizedBox(height: 30),
       BounceButton(
         imagePath: 'assets/images/watone.png',
@@ -167,38 +87,9 @@ class MakeMeritMainPage extends StatelessWidget {
           );
         },
       ),
-    ];
-  }
-
-  Widget _buildHeaderText(String text, double fontSize) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontFamily: 'NotoSansThai',
-        fontSize: fontSize,
-        fontWeight: FontWeight.bold,
-        color: Colors.green,
       ),
-      textAlign: TextAlign.center,
-    );
-  }
-
-  Widget _buildSubHeaderText(String text) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      decoration: BoxDecoration(
-        color: Colors.green.shade200,
-        borderRadius: BorderRadius.circular(16),
       ),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontFamily: 'NotoSansThai',
-          fontSize: 28,
-          color: Colors.green.shade900,
-          fontWeight: FontWeight.w600,
         ),
-        textAlign: TextAlign.center,
       ),
     );
   }
@@ -273,16 +164,13 @@ class _BounceButtonState extends State<BounceButton> with SingleTickerProviderSt
             child: Container(
               width: widget.width,
               height: widget.height,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.asset(widget.imagePath, fit: BoxFit.cover),
               ),
             ),
           ),
         ),
         const SizedBox(height: 16),
-        Text(widget.text, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green)),
       ],
     );
   }
