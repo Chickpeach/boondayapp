@@ -12,6 +12,9 @@ import 'package:boonday/blessing_select_page.dart';
 import 'package:boonday/blessing_detail_page.dart';
 import 'package:boonday/main_screen.dart';
 import 'package:boonday/cart/cart_screen.dart'; // Import CartScreen
+import 'package:boonday/profile_screen.dart'; // Import ProfileScreen
+import 'package:boonday/edit_profile_screen.dart'; // Import EditProfileScreen
+
 
 class AppRoutes {
   static const String splash = '/';
@@ -27,6 +30,8 @@ class AppRoutes {
   static const String blessingDetail = '/blessing-detail';
   static const String mainScreen = '/main-screen';
   static const String cart = '/cart'; // Add cart route
+  static const String profile = '/profile';
+  static const String editProfile = '/edit-profile';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -49,5 +54,7 @@ class AppRoutes {
       ),
     ),
     cart: (context) => const CartScreen(), // Map cart route to CartScreen
+    profile: (context) => const ProfileScreen(), // Map /profile to ProfileScreen
+    editProfile: (context) => const EditProfileScreen(), // Map /edit-profile to EditProfileScreen
   };
 }

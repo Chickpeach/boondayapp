@@ -49,46 +49,27 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               _buildMenuItem(context, 'บัญชีผู้ใช้', 0, () {
-                setState(() {
-                  _selectedIndex = 0;
-                });
-                // TODO: ไปที่หน้าบัญชีผู้ใช้ (ถ้ามี)
-                print('ไปที่หน้าบัญชีผู้ใช้');
+                Navigator.pushNamed(context, AppRoutes.profile);
               }),
               _buildMenuItem(context, 'ประวัติการทำบุญ', 1, () {
-                setState(() {
-                  _selectedIndex = 1;
-                });
                 Navigator.pushNamed(context, AppRoutes.history); // Navigate to history
               }),
               _buildMenuItem(context, 'หน้าหลัก', 2, () {
-                setState(() {
-                  _selectedIndex = 2;
-                });
                 Navigator.pop(context);
               }),
               _buildMenuItem(context, 'ตักบาตร & ทำบุญ', 3, () {
-                setState(() {
-                  _selectedIndex = 3;
-                });
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const BlessingMainPage()), // ยังคงเชื่อมไป BlessingMainPage ตามเดิม
                 );
               }),
               _buildMenuItem(context, 'ขอพร & เสริมดวง', 4, () {
-                setState(() {
-                  _selectedIndex = 4;
-                });
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MakeMeritMainPage()),
                 );
               }),
               _buildMenuItem(context, 'บริจาคมูลนิธิ', 5, () {
-                setState(() {
-                  _selectedIndex = 5;
-                });
                 // TODO: ไปที่หน้าบริจาคมูลนิธิ (ถ้ามี)
                 print('ไปที่หน้าบริจาคมูลนิธิ');
               }),
@@ -112,7 +93,12 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
     );
 
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+        onTap(); // เรียก onTap ที่ส่งมา
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

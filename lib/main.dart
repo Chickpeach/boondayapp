@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'routes/app_routes.dart';
 import 'cart/cart_provider.dart';
+import 'providers/user_profile.dart'; // Import UserProfile
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => CartProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => CartProvider()),
+        ChangeNotifierProvider(create: (context) => UserProfile()), // Add UserProfile Provider
+      ],
       child: const BoondayApp(),
     ),
   );
