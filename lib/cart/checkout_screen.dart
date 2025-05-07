@@ -3,47 +3,49 @@ import 'package:boonday/routes/app_routes.dart'; // Import AppRoutes
 import 'package:provider/provider.dart'; // Import Provider
 import '../cart/cart_provider.dart'; // Import CartProvider
 
-class CheckoutScreen extends StatefulWidget { // เปลี่ยนเป็น StatefulWidget
+class CheckoutScreen extends StatefulWidget {
   final String? qrCodeData;
   final String bankName;
   final String accountNumber;
-  final double totalPrice; // ตัวแปรสำหรับราคารวม
+  final double totalPrice;
 
   const CheckoutScreen({
     Key? key,
     required this.qrCodeData,
     required this.bankName,
     required this.accountNumber,
-    required this.totalPrice, // รับค่า totalPrice ใน Constructor
+    required this.totalPrice,
   }) : super(key: key);
 
   @override
-  State<CheckoutScreen> createState() => _CheckoutScreenState(); // สร้าง State
+  State<CheckoutScreen> createState() => _CheckoutScreenState();
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
-  bool _isConfirmingPayment = false; // State สำหรับควบคุมสถานะการโหลด
+  bool _isConfirmingPayment = false;
 
   Future<void> _confirmPayment() async {
     setState(() {
-      _isConfirmingPayment = true; // เริ่มแสดง Animation หมุนๆ
+      _isConfirmingPayment = true;
     });
 
-    // TODO: ใส่ Logic การชำระเงินจริง (ถ้ามี) ตรงนี้
-
-    // จำลองการทำงานของการชำระเงิน (หน่วงเวลา 3 วินาที)
+    // จำลองการยืนยันการชำระเงิน
     await Future.delayed(const Duration(seconds: 3));
 
-    // เข้าถึง CartProvider และล้างตะกร้า
+    // ล้างข้อมูลตะกร้า
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
-    cartProvider.clear(); // หรือ cartProvider.removeAllItems(); แล้วแต่ Function ที่คุณสร้างไว้
+    cartProvider.clear();
 
     setState(() {
-      _isConfirmingPayment = false; // หยุดแสดง Animation หมุนๆ
+      _isConfirmingPayment = false;
     });
 
-    // นำทางไปยังหน้า History โดยใช้ AppRoutes.history
-    Navigator.pushReplacementNamed(context, AppRoutes.history);
+    // กลับไปหน้า MainScreen และล้าง stack
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      AppRoutes.mainScreen, // ← ใช้ route ชื่อ mainScreen ตามที่ประกาศไว้
+          (Route<dynamic> route) => false,
+    );
   }
 
   @override
@@ -70,18 +72,22 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
-          child: SingleChildScrollView( // เพิ่ม SingleChildScrollView หากเนื้อหายาวเกินไป
+          child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Icon(Icons.payment, size: 80.0, color: Colors.green),
                 const SizedBox(height: 16.0),
-                const Text('สแกน QR Code เพื่อชำระเงิน',
-                    style: TextStyle(fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'NotoSansThai',),
-                    textAlign: TextAlign.center),
+                const Text(
+                  'สแกน QR Code เพื่อชำระเงิน',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'NotoSansThai',
+                  ),
+                  textAlign: TextAlign.center,
+                ),
                 const SizedBox(height: 24.0),
                 Image.asset(
                   'assets/images/BOONDAY_qrcode.png',
@@ -90,11 +96,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   fit: BoxFit.cover,
                 ),
                 const SizedBox(height: 24.0),
-                Text(widget.bankName,
-                  style: const TextStyle(fontWeight:
-                  FontWeight.bold,
+                Text(
+                  widget.bankName,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
                     fontFamily: 'NotoSansThai',
-                    color: Color(0xFF19C3A3,),
+                    color: Color(0xFF19C3A3),
                   ),
                 ),
                 Text(
@@ -102,35 +109,40 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   style: const TextStyle(
                     fontSize: 16.0,
                     fontFamily: 'NotoSansThai',
-                    color: Colors.purple, // เปลี่ยนเป็นสีที่คุณต้องการ
+                    color: Colors.purple,
                   ),
                 ),
                 const SizedBox(height: 16.0),
                 Text(
-                  'ยอดที่ต้องชำระ: ${widget.totalPrice.toStringAsFixed(2)} บาท', // แสดงราคารวม
-                  style: const TextStyle(fontSize: 18.0,
+                  'ยอดที่ต้องชำระ: ${widget.totalPrice.toStringAsFixed(2)} บาท',
+                  style: const TextStyle(
+                    fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'NotoSansThai',
                     color: Color(0xFFF68CBA),
                   ),
                 ),
                 const SizedBox(height: 32.0),
-                const Text('เมื่อชำระเงินเสร็จสิ้นแล้วกรุณากดยืนยัน',
-                    style: TextStyle(fontSize: 14.0,
-                        fontFamily: 'NotoSansThai',
-                        color: Colors.grey),
-                    textAlign: TextAlign.center),
-                const SizedBox(height: 24.0), // เพิ่ม SizedBox เพื่อเว้นระยะ
+                const Text(
+                  'เมื่อชำระเงินเสร็จสิ้นแล้วกรุณากดยืนยัน',
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    fontFamily: 'NotoSansThai',
+                    color: Colors.grey,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 24.0),
                 ElevatedButton(
-                  onPressed: _isConfirmingPayment ? null : _confirmPayment, // เรียก _confirmPayment เมื่อปุ่มถูกกด
+                  onPressed: _isConfirmingPayment ? null : _confirmPayment,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF19C3A3), // สีเขียวสดใส (ค่า Hex เดียวกับปุ่ม Check out โดยประมาณ)
+                    backgroundColor: const Color(0xFF19C3A3),
                     padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 12.0),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0), // ทำให้ขอบโค้งมนมาก
+                      borderRadius: BorderRadius.circular(50.0),
                     ),
                   ),
-                  child: _isConfirmingPayment // แสดง CircularProgressIndicator ถ้ารอการยืนยัน
+                  child: _isConfirmingPayment
                       ? const SizedBox(
                     width: 24,
                     height: 24,
@@ -140,9 +152,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   )
                       : const Text(
                     'ยืนยันการชำระเงิน',
-                    style: TextStyle(fontSize: 18.0,
-                        fontFamily: 'NotoSansThai',
-                        color: Colors.white),
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontFamily: 'NotoSansThai',
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],

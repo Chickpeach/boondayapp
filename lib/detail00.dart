@@ -14,6 +14,7 @@ class _DetailFoundation00State extends State<DetailFoundation00> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _buildAppBar(context),
       body: SafeArea(
         child: Container(
           color: Colors.white,
@@ -24,15 +25,7 @@ class _DetailFoundation00State extends State<DetailFoundation00> {
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
                     children: [
-                      const SizedBox(height: 18),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildImage('assets/images/menu.png'),
-                          _buildImage('assets/images/time.png'),
-                        ],
-                      ),
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.only(left: 31),
                         child: Text(
@@ -53,7 +46,12 @@ class _DetailFoundation00State extends State<DetailFoundation00> {
                       ),
                       const SizedBox(height: 44),
                       Center(
-                        child: _buildImage('assets/images/foundation1.png', size: 400),
+                        child: Image.asset(
+                          'assets/images/foundation1.png',
+                          width: 400,
+                          height: 400,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       const SizedBox(height: 44),
                       Padding(
@@ -71,7 +69,6 @@ class _DetailFoundation00State extends State<DetailFoundation00> {
                               "ประเภทองค์กร : องค์กรไม่แสวงหาผลกำไร\n"
                               "วัตถุประสงค์ : เพื่อเป็นสะพานเชื่อมระหว่างผู้ให้และผู้รับ ในการสนับสนุนการรักษาพยาบาลสำหรับผู้ป่วยยากไร้ในโรงพยาบาลศิริราช \n"
                               "โรงพยาบาลแห่งแรกของประเทศไทยและศูนย์การแพทย์ชั้นนำระดับประเทศ ด้วยภารกิจหลักในการจัดซื้อเครื่องมือแพทย์ที่ทันสมัย สนับสนุนทุนการศึกษาแก่บุคลากรทางการแพทย์ และต่อชีวิตให้กับผู้ป่วยที่ขาดแคลน ศิริราชมูลนิธิจึงกลายเป็นที่พึ่งสุดท้ายของหลายชีวิตในทุกวัน บริจาควันนี้ คือการแบ่งเบาภาระให้โรงพยาบาล และต่อโอกาสให้ผู้ป่วยได้เข้าถึงการรักษาอย่างเท่าเทียม\n"
-                              "และต่อชีวิตให้กับผู้ป่วยที่ขาดแคลน ศิริราชมูลนิธิจึงกลายเป็นที่พึ่งสุดท้ายของหลายชีวิตในทุกวัน บริจาควันนี้ คือการแบ่งเบาภาระให้โรงพยาบาล และต่อโอกาสให้ผู้ป่วยได้เข้าถึงการรักษาอย่างเท่าเทียม\n"
                               "สายด่วน : 024198053\n"
                               "เว็บไซต์ : https://www.sirirajfoundation.org/th/\n"
                               "ที่ตั้ง : ตึกมหิดลบำเพ็ญ ชั้น 1 เลขที่ 2โรงพยาบาลศิริราช",
@@ -99,7 +96,8 @@ class _DetailFoundation00State extends State<DetailFoundation00> {
                                   accountNumber: '099300039694491',
                                   thankYouTitle: 'ศิริราชมูลนิธิ',
                                   thankYouSubTitle: 'ขอบคุณจากหัวใจ ที่คุณเลือกเป็นพลังในการรักษา',
-                                  thankYouBodyText: ' ขอบคุณที่ร่วมเป็นส่วนหนึ่งในการช่วยเหลือผู้ป่วยยากไร้และสนับสนุนการพัฒนาการแพทย์ของโรงพยาบาลศิริราช ทุกยอดบริจาคของคุณคือเส้นเลือดฝอยที่หล่อเลี้ยงร่างกายของระบบสาธารณสุขให้แข็งแรงขึ้น ขอบคุณที่มองเห็นคุณค่าของชีวิตของผู้ป่วยแม้คุณจะไม่รู้จักเขาโดยตรง ศิริราชมูลนิธิขอสัญญาว่า จะใช้ทุกบาทอย่างซื่อสัตย์ โปร่งใส และเต็มเปี่ยมด้วยหัวใจของผู้ให้',
+                                  thankYouBodyText:
+                                  ' ขอบคุณที่ร่วมเป็นส่วนหนึ่งในการช่วยเหลือผู้ป่วยยากไร้และสนับสนุนการพัฒนาการแพทย์ของโรงพยาบาลศิริราช ทุกยอดบริจาคของคุณคือเส้นเลือดฝอยที่หล่อเลี้ยงร่างกายของระบบสาธารณสุขให้แข็งแรงขึ้น ขอบคุณที่มองเห็นคุณค่าของชีวิตของผู้ป่วยแม้คุณจะไม่รู้จักเขาโดยตรง ศิริราชมูลนิธิขอสัญญาว่า จะใช้ทุกบาทอย่างซื่อสัตย์ โปร่งใส และเต็มเปี่ยมด้วยหัวใจของผู้ให้',
                                 ),
                               ),
                             ).then((_) {
@@ -115,10 +113,10 @@ class _DetailFoundation00State extends State<DetailFoundation00> {
                               color: const Color(0xFF19C3A3),
                             ),
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                            child: Text(
+                            child: const Text(
                               "บริจาค",
                               style: TextStyle(
-                              color: Colors.white,
+                                color: Colors.white,
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -138,13 +136,22 @@ class _DetailFoundation00State extends State<DetailFoundation00> {
     );
   }
 
-  Widget _buildImage(String path, {double size = 35}) {
-    return Image.asset(
-      path,
-      width: size,
-      height: size,
-      fit: BoxFit.contain,
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leading: IconButton(
+        icon: Image.asset('assets/icons/back.png', width: 35, height: 35),
+        onPressed: () => Navigator.pop(context),
+      ),
+      actions: [
+        IconButton(
+          icon: Image.asset('assets/icons/cart.png', width: 28, height: 28),
+          onPressed: () {
+            Navigator.pushNamed(context, '/cart'); // แก้ตามชื่อ route จริงของคุณ
+          },
+        ),
+      ],
     );
   }
 }
-

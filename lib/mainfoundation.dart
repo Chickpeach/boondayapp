@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'detail00.dart';
 import 'detail01.dart';
@@ -37,29 +38,11 @@ class _MainFoundationState extends State<MainFoundation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _buildAppBar(context),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 16),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: 35,
-                      height: 35,
-                      child: Image.asset('assets/images/menu.png', fit: BoxFit.cover),
-                    ),
-                    SizedBox(
-                      width: 35,
-                      height: 35,
-                      child: Image.asset('assets/images/time.png', fit: BoxFit.cover),
-                    ),
-                  ],
-                ),
-              ),
               const SizedBox(height: 30),
               const Center(
                 child: Text(
@@ -143,6 +126,25 @@ class _MainFoundationState extends State<MainFoundation> {
     );
   }
 
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leading: IconButton(
+        icon: Image.asset('assets/icons/back.png', width: 35, height: 35),
+        onPressed: () => Navigator.pop(context),
+      ),
+      actions: [
+        IconButton(
+          icon: Image.asset('assets/icons/cart.png', width: 28, height: 28),
+          onPressed: () {
+            Navigator.pushNamed(context, '/cart'); // ปรับตาม route ของคุณ
+          },
+        ),
+      ],
+    );
+  }
+
   Widget buildFoundationRow(
       String assetLeft,
       String titleLeft,
@@ -175,9 +177,7 @@ class _MainFoundationState extends State<MainFoundation> {
             ),
             clipBehavior: Clip.antiAlias,
             child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 300, // 👈 ปรับให้ขนาดเล็กลงเล็กน้อย
-              ),
+              constraints: const BoxConstraints(maxWidth: 300),
               child: AspectRatio(
                 aspectRatio: 1,
                 child: Image.asset(asset, fit: BoxFit.cover),

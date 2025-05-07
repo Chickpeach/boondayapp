@@ -1,5 +1,6 @@
+import 'package:boonday/routes/app_routes.dart';
 import 'package:flutter/material.dart';
-import 'thankyoudonate.dart';
+import 'package:boonday/thankyoudonate.dart';
 import 'package:intl/intl.dart';
 
 class PaymentDonate extends StatelessWidget {
@@ -34,13 +35,16 @@ class PaymentDonate extends StatelessWidget {
     }
   }
 
-  Widget _buildImage(String path) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Image.asset(
-        path,
-        width: 40,
-        height: 40,
+  Widget _buildImage(String path, {VoidCallback? onTap}) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Image.asset(
+          path,
+          width: 40,
+          height: 40,
+        ),
       ),
     );
   }
@@ -59,8 +63,13 @@ class PaymentDonate extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _buildImage('assets/images/menu.png'),
-                    _buildImage('assets/images/time.png'),
+                    _buildImage(
+                      'assets/icons/back.png',
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    _buildImage('assets/icons/cart.png'), // Placeholder สำหรับไอคอนฝั่งขวา (ถ้ามี)
                   ],
                 ),
                 const SizedBox(height: 30),
@@ -121,15 +130,11 @@ class PaymentDonate extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.push(
+                          // นำทางไปยังหน้าหลัก (MainScreen) และลบ routes อื่นๆ ใน stack
+                          Navigator.pushNamedAndRemoveUntil(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => ThankYouDonate(
-                                title: thankYouTitle,
-                                subTitle: thankYouSubTitle,
-                                bodyText: thankYouBodyText,
-                              ),
-                            ),
+                            AppRoutes.mainScreen, // <--- ใช้ AppRoutes.mainScreen
+                                (route) => false,
                           );
                         },
                         child: Text(

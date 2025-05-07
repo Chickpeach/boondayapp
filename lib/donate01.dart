@@ -119,8 +119,13 @@ class DonateState extends State<Donate> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildImage('assets/images/menu.png'),
-                  _buildImage('assets/images/time.png'),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: _buildImage('assets/icons/back.png'),
+                  ),
+                  _buildImage('assets/icons/cart.png'),
                 ],
               ),
               const SizedBox(height: 50),

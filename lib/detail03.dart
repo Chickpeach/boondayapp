@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'donate01.dart'; // ต้องมี Donate widget ที่รับ foundationName และ foundationImage
 
-
 class DetailFoundation03 extends StatefulWidget {
   const DetailFoundation03({super.key});
 
@@ -15,6 +14,7 @@ class _DetailFoundation03State extends State<DetailFoundation03> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _buildAppBar(context),
       body: SafeArea(
         child: Container(
           color: Colors.white,
@@ -25,15 +25,7 @@ class _DetailFoundation03State extends State<DetailFoundation03> {
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
                     children: [
-                      const SizedBox(height: 18),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildImage('assets/images/menu.png'),
-                          _buildImage('assets/images/time.png'),
-                        ],
-                      ),
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.only(left: 31),
                         child: Text(
@@ -49,9 +41,7 @@ class _DetailFoundation03State extends State<DetailFoundation03> {
                       Center(
                         child: Text(
                           "มูลนิธิกระจกเงา",
-                          style: TextStyle(
-                            fontSize: 25,
-                          ),
+                          style: TextStyle(fontSize: 25),
                         ),
                       ),
                       const SizedBox(height: 44),
@@ -63,9 +53,7 @@ class _DetailFoundation03State extends State<DetailFoundation03> {
                         padding: const EdgeInsets.only(left: 22),
                         child: Text(
                           "รายละเอียดมูลนิธิกระจกเงา",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
+                          style: TextStyle(fontSize: 20),
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -106,7 +94,8 @@ class _DetailFoundation03State extends State<DetailFoundation03> {
                                   accountNumber: '099300015183602',
                                   thankYouTitle: 'มูลนิธิกระจกเงา',
                                   thankYouSubTitle: 'ขอบคุณที่เลือกสะท้อนความหวังให้สังคม',
-                                  thankYouBodyText: 'จากใจทีมงานและผู้คนที่คุณอาจไม่เคยพบเจอ ขอบคุณที่คุณเห็น “ตัวตน” ของคนไร้บ้าน เด็กหาย และผู้ถูกหลงลืมในสังคม การบริจาคของคุณคือแสงสว่างที่สะท้อนออกมาจากกระจกเงาบานหนึ่ง ให้ความหวัง ความเปลี่ยนแปลง และชีวิตใหม่สำหรับผู้ที่ไม่มีใคร แม้คุณจะไม่ได้รู้จักพวกเขาโดยตรง แต่เขาจะจดจำได้ว่า เคยมีใครบางคนที่เลือกจะไม่เมินผ่าน',
+                                  thankYouBodyText:
+                                  'จากใจทีมงานและผู้คนที่คุณอาจไม่เคยพบเจอ ขอบคุณที่คุณเห็น “ตัวตน” ของคนไร้บ้าน เด็กหาย และผู้ถูกหลงลืมในสังคม การบริจาคของคุณคือแสงสว่างที่สะท้อนออกมาจากกระจกเงาบานหนึ่ง ให้ความหวัง ความเปลี่ยนแปลง และชีวิตใหม่สำหรับผู้ที่ไม่มีใคร แม้คุณจะไม่ได้รู้จักพวกเขาโดยตรง แต่เขาจะจดจำได้ว่า เคยมีใครบางคนที่เลือกจะไม่เมินผ่าน',
                                 ),
                               ),
                             ).then((_) {
@@ -123,7 +112,7 @@ class _DetailFoundation03State extends State<DetailFoundation03> {
                               color: const Color(0xFF19C3A3),
                             ),
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                            child: Text(
+                            child: const Text(
                               "บริจาค",
                               style: TextStyle(
                                 color: Colors.white,
@@ -143,6 +132,25 @@ class _DetailFoundation03State extends State<DetailFoundation03> {
           ),
         ),
       ),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leading: IconButton(
+        icon: _buildImage('assets/icons/back.png', size: 35),
+        onPressed: () => Navigator.pop(context),
+      ),
+      actions: [
+        IconButton(
+          icon: _buildImage('assets/icons/cart.png', size: 28),
+          onPressed: () {
+            Navigator.pushNamed(context, '/cart'); // แก้ตามชื่อ route จริงของคุณ
+          },
+        ),
+      ],
     );
   }
 

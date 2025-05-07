@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'donate01.dart'; // ต้องมี Donate widget ที่รับ foundationName และ foundationImage
 
-
 class DetailFoundation02 extends StatefulWidget {
   const DetailFoundation02({super.key});
 
@@ -15,6 +14,7 @@ class _DetailFoundation02State extends State<DetailFoundation02> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _buildAppBar(context),
       body: SafeArea(
         child: Container(
           color: Colors.white,
@@ -25,15 +25,7 @@ class _DetailFoundation02State extends State<DetailFoundation02> {
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
                     children: [
-                      const SizedBox(height: 18),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildImage('assets/images/menu.png'),
-                          _buildImage('assets/images/time.png'),
-                        ],
-                      ),
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.only(left: 31),
                         child: Text(
@@ -142,6 +134,25 @@ class _DetailFoundation02State extends State<DetailFoundation02> {
           ),
         ),
       ),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leading: IconButton(
+        icon: _buildImage('assets/icons/back.png', size: 35),
+        onPressed: () => Navigator.pop(context),
+      ),
+      actions: [
+        IconButton(
+          icon: _buildImage('assets/icons/cart.png', size: 28),
+          onPressed: () {
+            Navigator.pushNamed(context, '/cart'); // แก้ตามชื่อ route จริงของคุณ
+          },
+        ),
+      ],
     );
   }
 

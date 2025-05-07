@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'donate01.dart'; // ต้องมี Donate widget ที่รับ foundationName และ foundationImage
-
+import 'donate01.dart';
 
 class DetailFoundation01 extends StatefulWidget {
   const DetailFoundation01({super.key});
@@ -15,6 +14,7 @@ class _DetailFoundation01State extends State<DetailFoundation01> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _buildAppBar(context),
       body: SafeArea(
         child: Container(
           color: Colors.white,
@@ -25,15 +25,7 @@ class _DetailFoundation01State extends State<DetailFoundation01> {
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
                     children: [
-                      const SizedBox(height: 18),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildImage('assets/images/menu.png'),
-                          _buildImage('assets/images/time.png'),
-                        ],
-                      ),
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.only(left: 31),
                         child: Text(
@@ -49,23 +41,24 @@ class _DetailFoundation01State extends State<DetailFoundation01> {
                       Center(
                         child: Text(
                           "มูลนิธิศูนย์พิทักษ์เด็ก",
-                          style: TextStyle(
-                            fontSize: 25,
-                          ),
+                          style: TextStyle(fontSize: 25),
                         ),
                       ),
                       const SizedBox(height: 44),
                       Center(
-                        child: _buildImage('assets/images/foundation2.png', size: 350),
+                        child: Image.asset(
+                          'assets/images/foundation2.png',
+                          width: 400,
+                          height: 400,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       const SizedBox(height: 44),
                       Padding(
                         padding: const EdgeInsets.only(left: 22),
                         child: Text(
                           "รายละเอียดมูลนิธิศูนย์พิทักษ์เด็ก",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
+                          style: TextStyle(fontSize: 20),
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -79,9 +72,7 @@ class _DetailFoundation01State extends State<DetailFoundation01> {
                               "สายด่วน : 02-412-1196\n"
                               "เว็บไซต์ : thaichildrights.org\n"
                               "ที่ตั้ง : กรุงเทพฯ (เพชรเกษม 63)",
-                          style: TextStyle(
-                            fontSize: 14,
-                          ),
+                          style: TextStyle(fontSize: 14),
                         ),
                       ),
                       const SizedBox(height: 52),
@@ -105,11 +96,11 @@ class _DetailFoundation01State extends State<DetailFoundation01> {
                                   accountNumber: '099300039694491',
                                   thankYouTitle: 'มูลนิธิศูนย์พิทักษ์เด็ก',
                                   thankYouSubTitle: 'คุณคือความปลอดภัยที่จับต้องได้ของเด็กคนหนึ่ง',
-                                  thankYouBodyText: 'ขอบคุณที่ไม่เมินเฉยต่อเสียงที่เบาแผ่วที่สุดของเด็ก ๆ ที่ต้องการความช่วยเหลือ การบริจาคของคุณคือการส่งมอบโอกาสใหม่ให้ชีวิตที่เคยถูกทำร้ายได้กลับมายิ้มได้อีกครั้ง ทีมงานทุกคนของมูลนิธิศูนย์พิทักษ์เด็กขอขอบคุณจากใจที่คุณเลือกยืนเคียงข้างเด็ก ๆ เหล่านี้ และหวังว่าเราจะได้ร่วมเดินทางแห่งการเปลี่ยนแปลงนี้ไปด้วยกันอีกในวันข้างหน้า',
+                                  thankYouBodyText:
+                                  'ขอบคุณที่ไม่เมินเฉยต่อเสียงที่เบาแผ่วที่สุดของเด็ก ๆ ที่ต้องการความช่วยเหลือ การบริจาคของคุณคือการส่งมอบโอกาสใหม่ให้ชีวิตที่เคยถูกทำร้ายได้กลับมายิ้มได้อีกครั้ง ทีมงานทุกคนของมูลนิธิศูนย์พิทักษ์เด็กขอขอบคุณจากใจที่คุณเลือกยืนเคียงข้างเด็ก ๆ เหล่านี้ และหวังว่าเราจะได้ร่วมเดินทางแห่งการเปลี่ยนแปลงนี้ไปด้วยกันอีกในวันข้างหน้า',
                                 ),
                               ),
                             ).then((_) {
-                              // ปลดล็อคเมื่อกลับมา
                               setState(() {
                                 isLocked = false;
                               });
@@ -122,7 +113,7 @@ class _DetailFoundation01State extends State<DetailFoundation01> {
                               color: const Color(0xFF19C3A3),
                             ),
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                            child: Text(
+                            child: const Text(
                               "บริจาค",
                               style: TextStyle(
                                 color: Colors.white,
@@ -145,20 +136,22 @@ class _DetailFoundation01State extends State<DetailFoundation01> {
     );
   }
 
-  Widget _buildImage(String path, {double size = 35}) {
-    return Image.asset(
-      path,
-      width: size,
-      height: size,
-      fit: BoxFit.contain,
-      errorBuilder: (context, error, stackTrace) {
-        return Container(
-          width: size,
-          height: size,
-          color: Colors.grey,
-          child: const Icon(Icons.error),
-        );
-      },
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leading: IconButton(
+        icon: Image.asset('assets/icons/back.png', width: 35, height: 35),
+        onPressed: () => Navigator.pop(context),
+      ),
+      actions: [
+        IconButton(
+          icon: Image.asset('assets/icons/cart.png', width: 28, height: 28),
+          onPressed: () {
+            Navigator.pushNamed(context, '/cart');
+          },
+        ),
+      ],
     );
   }
 }
