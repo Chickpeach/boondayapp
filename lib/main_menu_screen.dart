@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:boonday/routes/app_routes.dart'; // Import your AppRoutes
 import 'blessing_main_page.dart'; // Import the BlessingMainPage (อาจจะไม่ได้ใช้แล้ว)
 import 'make_merit_main.dart'; // Import MakeMeritMainPage
+import 'mainfoundation.dart';
 
 class MainMenuScreen extends StatefulWidget {
   const MainMenuScreen({Key? key}) : super(key: key);
@@ -70,8 +71,10 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                 );
               }),
               _buildMenuItem(context, 'บริจาคมูลนิธิ', 5, () {
-                // TODO: ไปที่หน้าบริจาคมูลนิธิ (ถ้ามี)
-                print('ไปที่หน้าบริจาคมูลนิธิ');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MainFoundation()),
+                );
               }),
               _buildMenuItem(context, 'ออกจากระบบ', 6, () {
                 _showLogoutConfirmationDialog(context);

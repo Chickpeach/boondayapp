@@ -4,6 +4,7 @@ import 'main_menu_screen.dart';
 import 'blessing_main_page.dart' as blessing;
 import 'make_merit_main.dart' as merit;
 import 'package:boonday/routes/app_routes.dart'; // Import AppRoutes
+import 'mainfoundation.dart';
 
 class WishingScreen extends StatelessWidget {
   const WishingScreen({super.key});
@@ -87,7 +88,7 @@ class MainScreen extends StatelessWidget {
         } else if (title == 'บริจาคมูลนิธิ') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const DonateFoundationScreen()),
+            MaterialPageRoute(builder: (context) => const MainFoundation()),
           );
         }
       },
