@@ -1,4 +1,3 @@
-import 'package:boonday/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:boonday/thankyoudonate.dart';
 import 'package:intl/intl.dart';
@@ -130,11 +129,15 @@ class PaymentDonate extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          // นำทางไปยังหน้าหลัก (MainScreen) และลบ routes อื่นๆ ใน stack
-                          Navigator.pushNamedAndRemoveUntil(
+                          Navigator.push(
                             context,
-                            AppRoutes.mainScreen, // <--- ใช้ AppRoutes.mainScreen
-                                (route) => false,
+                            MaterialPageRoute(
+                              builder: (context) => ThankYouDonate(
+                                title: thankYouTitle,
+                                subTitle: thankYouSubTitle,
+                                bodyText: thankYouBodyText,
+                              ),
+                            ),
                           );
                         },
                         child: Text(

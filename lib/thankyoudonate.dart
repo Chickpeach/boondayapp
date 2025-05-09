@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'mainfoundation.dart';
+import 'package:boonday/routes/app_routes.dart';
+
 
 class ThankYouDonate extends StatelessWidget {
   final String title;
@@ -72,11 +73,10 @@ class ThankYouDonate extends StatelessWidget {
                 const SizedBox(height: 40),
                 InkWell(
                   onTap: () {
-                    Navigator.pushAndRemoveUntil(
+                    // นำทางไปยังหน้าหลัก (MainScreen) และลบ routes อื่นๆ ใน stack
+                    Navigator.pushNamedAndRemoveUntil(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const MainFoundation(),
-                      ),
+                      AppRoutes.mainScreen, // <--- ใช้ AppRoutes.mainScreen
                           (route) => false,
                     );
                   },
