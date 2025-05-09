@@ -16,6 +16,7 @@ import 'package:boonday/profile_screen.dart'; // Import ProfileScreen
 import 'package:boonday/edit_profile_screen.dart'; // Import EditProfileScreen
 
 
+
 class AppRoutes {
   static const String splash = '/';
   static const String home = '/home';

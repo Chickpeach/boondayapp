@@ -29,10 +29,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       _isConfirmingPayment = true;
     });
 
-    // จำลองการยืนยันการชำระเงิน
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 2));
 
-    // ล้างข้อมูลตะกร้า
+    // เคลียร์ตะกร้า
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     cartProvider.clear();
 
@@ -40,11 +39,56 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       _isConfirmingPayment = false;
     });
 
-    // กลับไปหน้า MainScreen และล้าง stack
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      AppRoutes.mainScreen, // ← ใช้ route ชื่อ mainScreen ตามที่ประกาศไว้
-          (Route<dynamic> route) => false,
+    // แสดง popup
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFFF68CBA), // ชมพูหวาน
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: const Text(
+            'ขอบคุณที่ใช้บริการ',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: 'NotoSansThai',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          content: const Text(
+            'สามารถตรวจสอบรายการสั่งซื้อได้ที่แอป Boonday Official (แอปเขียว)',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: 'NotoSansThai',
+              fontSize: 16,
+              color: Colors.black87,
+            ),
+          ),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  AppRoutes.mainScreen,
+                      (Route<dynamic> route) => false,
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF19C3A3), // เขียวมิ้นต์
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+              child: const Text('ตกลง'),
+            ),
+          ],
+        );
+      },
     );
   }
 
