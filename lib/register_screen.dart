@@ -14,7 +14,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final _fullNameController = TextEditingController();
   final _ageController = TextEditingController();
-  final _genderController = TextEditingController();
+  String? _selectedGender;
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             }
                             return null;
                           },
+                          keyboardType: TextInputType.text, // เปลี่ยนเป็น TextInputType.text
                         ),
                         const SizedBox(height: 20),
                         Align(
@@ -132,7 +133,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         const SizedBox(height: 5),
                         TextFormField(
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.number, // คีย์บอร์ดสำหรับตัวเลข
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.8),
@@ -177,7 +178,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         const SizedBox(height: 5),
-                        TextFormField(
+                        DropdownButtonFormField<String>(
+                          value: _selectedGender,
+                          items: ['หญิง', 'ชาย', 'LGBTQ+']
+                              .map((gender) => DropdownMenuItem(
+                            value: gender,
+                            child: Text(
+                              gender,
+                              style: TextStyle(color: Colors.black), // เปลี่ยนเป็นสีดำ
+                            ),
+                          ))
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedGender = value;
+                            });
+                          },
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.8),
@@ -187,10 +203,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             contentPadding: const EdgeInsets.symmetric(horizontal: 20),
                           ),
-                          controller: _genderController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'กรุณากรอกเพศ';
+                              return 'กรุณาเลือกเพศ';
                             }
                             return null;
                           },
@@ -213,7 +228,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 Provider.of<UserProfile>(context, listen: false).updateProfile(
                                   fullName: _fullNameController.text,
                                   age: _ageController.text,
-                                  gender: _genderController.text,
+                                  gender: _selectedGender ?? '',
                                 );
                                 Navigator.pushNamed(context, AppRoutes.register2);
                               }
