@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../routes/app_routes.dart'; // สำหรับการกลับหน้า home หรืออื่น ๆ
+import '../routes/app_routes.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_profile.dart';
 
@@ -15,6 +15,7 @@ class _Register2ScreenState extends State<Register2Screen> {
   final _birthDateController = TextEditingController();
   final _phoneNumberController = TextEditingController();
   final _usernameController = TextEditingController();
+  DateTime? _selectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +88,36 @@ class _Register2ScreenState extends State<Register2Screen> {
                         ),
                         const SizedBox(height: 5),
                         TextFormField(
+                          controller: _birthDateController,
+                          readOnly: true,
+                          onTap: () async {
+                            FocusScope.of(context).requestFocus(FocusNode());
+
+                            final DateTime? picked = await showDatePicker(
+                              context: context,
+                              initialDate: _selectedDate ?? DateTime.now(),
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now(),
+                              locale: const Locale("th", "TH"),
+                              builder: (BuildContext context, Widget? child) {
+                                return Theme(
+                                  data: ThemeData.light().copyWith(
+                                    primaryColor: Color(0xFFF68CBA), // สีชมพูสำหรับหัวข้อของวัน
+                                    buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+                                    colorScheme: ColorScheme.light(primary: Color(0xFFF68CBA)), // สีชมพูสำหรับการเลือกวัน
+                                  ),
+                                  child: child!,
+                                );
+                              },
+                            );
+                            if (picked != null) {
+                              setState(() {
+                                _selectedDate = picked;
+                                _birthDateController.text = "${picked.day}/${picked.month}/${picked.year}";
+                              });
+                            }
+                          },
+
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.8),
@@ -95,13 +126,12 @@ class _Register2ScreenState extends State<Register2Screen> {
                               borderSide: const BorderSide(width: 2),
                             ),
                             contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                            suffixIcon: const Icon(Icons.calendar_today),
                           ),
-                          controller: _birthDateController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'กรุณากรอกวัน/เดือน/ปี เกิด';
+                              return 'กรุณาเลือกวัน/เดือน/ปี เกิด';
                             }
-                            // เพิ่มการตรวจสอบรูปแบบวันที่เพิ่มเติมได้ถ้าต้องการ
                             return null;
                           },
                         ),
@@ -141,7 +171,6 @@ class _Register2ScreenState extends State<Register2Screen> {
                             if (value == null || value.isEmpty) {
                               return 'กรุณากรอกเบอร์โทรศัพท์';
                             }
-                            // เพิ่มการตรวจสอบรูปแบบเบอร์โทรศัพท์เพิ่มเติมได้ถ้าต้องการ
                             return null;
                           },
                         ),
@@ -180,7 +209,6 @@ class _Register2ScreenState extends State<Register2Screen> {
                             if (value == null || value.isEmpty) {
                               return 'กรุณากรอกชื่อผู้ใช้งาน';
                             }
-                            // เพิ่มการตรวจสอบความซ้ำซ้อนของชื่อผู้ใช้งานได้ถ้าต้องการ
                             return null;
                           },
                         ),
@@ -199,7 +227,6 @@ class _Register2ScreenState extends State<Register2Screen> {
                             ),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                // เก็บข้อมูลลงใน UserProfile Provider
                                 Provider.of<UserProfile>(context, listen: false).updateProfile(
                                   birthDate: _birthDateController.text,
                                   phoneNumber: _phoneNumberController.text,
